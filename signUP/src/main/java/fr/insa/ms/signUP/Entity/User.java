@@ -1,11 +1,20 @@
 package fr.insa.ms.signUP.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+@Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userID; // ID random
     private String firstName;
     private String lastName;
     private String email; // ID
-    private String userID; // ID
+
+    private String nickName; // ID
     private String password;
     private String userType;  // Volunteer or Other
 
@@ -15,9 +24,16 @@ public class User {
         this.email = email;
         this.password = password;
         this.userType = userType;
-        this.userID = firstName + lastName;
+        this.nickName = firstName + lastName;
     }
 
+    public User() {
+
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -43,12 +59,12 @@ public class User {
         this.email = email;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getPassword() {
