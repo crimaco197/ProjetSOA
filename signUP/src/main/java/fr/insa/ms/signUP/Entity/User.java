@@ -1,15 +1,14 @@
-package fr.insa.ms.signUP.model;
+package fr.insa.ms.signUP.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 @Entity
+@Table(name = "Users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userID; // ID random
+    private int userID; // ID random
     private String firstName;
     private String lastName;
     private String email; // ID
@@ -31,9 +30,19 @@ public class User {
 
     }
 
-    public void setUserID(Long userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
+
+    // Anter de guardar el usuario genera el nickname
+    /*
+    @PrePersist
+    private void generateNickName() {
+        if (this.nickName == null || this.nickName.isEmpty()) {
+            this.nickName = (this.firstName + this.lastName).replaceAll(" ", "");
+        }
+    }
+    */
 
     public String getFirstName() {
         return firstName;

@@ -1,4 +1,4 @@
-package fr.insa.ms.signUP.Controller;
+package fr.insa.ms.signUP.Service;
 
 import fr.insa.ms.signUP.Entity.User;
 import fr.insa.ms.signUP.Repository.UserRepository;
@@ -33,6 +33,11 @@ public class UserService {
         // Validar si ya existe un usuario con el mismo email
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new IllegalArgumentException("El email ya está en uso.");
+        }
+
+        // GENERATE NICKNAME BEFORE SAVING NEW USER
+        if (user.getNickName() == null || user.getNickName().isEmpty()) {
+            user.setNickName((user.getFirstName() + user.getLastName()).replaceAll(" ", ""));
         }
 
         // Guardar el nuevo usuario
